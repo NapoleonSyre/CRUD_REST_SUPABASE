@@ -3,15 +3,20 @@ package co.edu.poli.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
 @SpringBootApplication
 public class ExampleApplication {
 
-	public static void main(String[] args) {	
-		Dotenv dotenv = Dotenv.configure().load();
-        System.setProperty("DB_USER_SUPABASE", dotenv.get("DB_USER_SUPABASE"));
-        System.setProperty("DB_PWD_SUPABASE", dotenv.get("DB_PWD_SUPABASE"));	
+	public static void main(String[] args) {
+
+
+        String user = System.getenv("DB_USER_SUPABASE");
+        String pass = System.getenv("DB_PWD_SUPABASE");
+
+       
+        System.out.println("DB_USER_SUPABASE = " + user);
+        System.out.println("DB_PWD_SUPABASE = " + (pass != null ? "********" : "NO DEFINIDA"));
+
+        // Iniciar Spring Boot
 		SpringApplication.run(ExampleApplication.class, args);
 	}
 
